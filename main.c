@@ -40,20 +40,31 @@ void git_push() {
     system(command);
 }
 
-void auto_git() {
+void git_auto() {
     git_add();
     git_commit();
     git_push();
 }
 
+void git_custom(int argc, char * argv[]){
+    printf("%d", argc);
+    for (int i = 1; i < argc, i++;) {
+        printf("%s", argv[i]);
+    }
+}
+
 int main(int argc, char *argv[]) {
-    if(argc == 2) {
+    if(argc >= 2) {
         char * input;
 
         strcpy(input, argv[1]);
 
-        if(strcmp(input, "auto") == 0) {
-            auto_git();
+        if (strcmp(input, "auto") == 0) {
+            git_auto();
+        }
+
+        else if (strcmp(input, "custom") == 0) {
+            git_custom(argc, argv);
         }
 
         else {
