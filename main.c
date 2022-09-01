@@ -53,8 +53,7 @@ int main(int argc, char *argv[]) {
         strcpy(input, argv[1]);
 
         if(strcmp(input, "auto") == 0) {
-            git_add();
-            git_commit();
+            auto_git();
         }
 
         else {
