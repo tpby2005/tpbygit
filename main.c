@@ -4,10 +4,9 @@
 #include <time.h>
 
 void git_add() {
-    char * command;
+    char * command = "git add *";
 
-    printf("Adding all files...");
-    strcpy(command, "git add *");
+    printf("Adding all files...\n");
     system(command);
 }
 
@@ -16,20 +15,27 @@ void git_commit() {
     struct tm * ti;
     time(&t);
     ti = localtime(&t);
+    
+    char * time = asctime(ti);
+    char additional[2] = "\"";
+    char dest[100];
 
-    char * initial;
-    char * command;
+    strncpy(dest, time, strlen(time)-1);
 
-    printf("Committing...");
-    initial = strcat("git commit -m ", asctime(ti));
-    strcpy(command, initial);
+    strcat(dest, additional);
+    strcat(additional, dest);
+    printf("%s", additional);
+    char command[100] = "git commit -m ";
+
+    printf("Committing...\n");
+    strcat(command, additional);
+    system(command);
 }
 
 void git_push() {
-    char * command;
+    char * command = "git push origin main";
 
-    printf("Pushing to main...");
-    strcpy(command, "git push origin main");
+    printf("Pushing to main...\n");
     system(command);
 }
 
@@ -41,8 +47,13 @@ void auto_git() {
 
 int main(int argc, char *argv[]) {
     if(argc == 2) {
-        if(strcmp(argv[1], "auto") == 0) {
-            auto_git();
+        char * input;
+
+        strcpy(input, argv[1]);
+
+        if(strcmp(input, "auto") == 0) {
+            git_add();
+            git_commit();
         }
 
         else {
