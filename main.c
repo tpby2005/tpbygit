@@ -20,6 +20,7 @@ void git_commit() {
     char additional[2] = "\"";
     char dest[100];
 
+    //remove dumbass \n from asctime
     strncpy(dest, time, strlen(time)-1);
 
     strcat(dest, additional);
